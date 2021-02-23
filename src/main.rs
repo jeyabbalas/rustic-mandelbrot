@@ -1,3 +1,5 @@
 fn main() {
-    rustic_mandelbrot::run(500_u32);
+    if let Err(e) = rustic_mandelbrot::run() {
+        eprintln!("Error generating mandelbrot plot: {}", e);
+    }
 }

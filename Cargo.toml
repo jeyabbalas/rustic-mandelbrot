@@ -8,5 +8,5 @@ edition = "2018"
 
 [dependencies]
 num = "*"
-ndarray = "0.14.0"
 image = "*"
+colorgrad = "0.3.0"
