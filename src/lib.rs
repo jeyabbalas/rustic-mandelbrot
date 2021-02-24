@@ -3,7 +3,7 @@ use std::error::Error;
 use colorgrad;
 
 
-const MAX_ITERATIONS: u32 = 1000;
+const MAX_ITERATIONS: u32 = 100;
 const RESOLUTION: u32 = 1024;
 const RE_MIN: f64 = -2.0;
 const RE_MAX: f64 = 1.0;
@@ -32,15 +32,17 @@ fn escape_time() -> Result<(), Box<dyn Error>> {
 
     let mut imgbuf = image::ImageBuffer::new(RESOLUTION, RESOLUTION);
     let grad = colorgrad::CustomGradient::new()
-                                         .html_colors(&["turquoise", 
-                                                        "darkblue"])
+                                         .html_colors(&["white", 
+                                                        "lightblue", 
+                                                        "darkblue",
+                                                        "black"])
                                          .domain(&[0., MAX_ITERATIONS as f64])
                                          .build()?;
 
     for x in 0..RESOLUTION {
         for y in 0..RESOLUTION {
-            let cx = re_range*(x as f64/MAX_ITERATIONS as f64) + RE_MIN;
-            let cy = im_range*(y as f64/MAX_ITERATIONS as f64) + IM_MIN;
+            let cx = re_range*(x as f64/RESOLUTION as f64) + RE_MIN;
+            let cy = im_range*(y as f64/RESOLUTION as f64) + IM_MIN;
 
             let n_iter = calculate_escape(Complex::new(cx, cy));
 
